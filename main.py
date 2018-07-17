@@ -1,6 +1,7 @@
 
 import my_typeforms
 import invoice
+import response_object
 
 def generateInvoice(response):
     pass
@@ -20,13 +21,18 @@ def approve(responses):
         while (approval != "y" and approval != "n"):
                 approval = input('That is not a valid option. Approve this booking (y/n)?: ')
         if (approval == "y"):
-            print(ok)
-            sendEmail(reponse, generateInvoice(response))
-            updateCalendar(reponse)
-            generateInvoice(response)
+            print("ok")
+            responseObj = response_object.ResponseObject(response)
+            inv = invoice.Invoice(responseObj)
+            print("Generating invoice ...")
+            inv_number = inv.generateInvoice()
+        #    invoice.generateInvoice()
+        #    sendEmail(reponse, generateInvoice(response))
+        #    updateCalendar(reponse)
+        #    generateInvoice(response)
         elif (approval == "n"):
-            print(ok)
-            sendRejectedEmail
+            print("ok")
+
 
 
 def main():
@@ -38,8 +44,6 @@ def main():
 
 
 if __name__ == '__main__':
-
    main()
 
-print("asdaasd")
-input("Press enter to exit ;)")
+input("All done! Press Enter to exit.")
