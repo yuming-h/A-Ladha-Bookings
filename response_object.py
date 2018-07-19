@@ -29,6 +29,7 @@ class ResponseObject:
 
     def __init__(self, response):
         self.name = ""
+        self.title = ""
         self.org = ""
         self.phone_number = ""
         self.email = ""
@@ -37,9 +38,11 @@ class ResponseObject:
         self.equip = []
         self.year = 0
         self.month = 0
-        self.date = 0
+        self.date = ''
+        self.starttime = ''
         self.starthour = 0
         self.startmin = 0
+        self.endtime = ''
         self.endhour = 0
         self.endmin = 0
         self.event_name = ""
@@ -48,13 +51,14 @@ class ResponseObject:
         self.sol = False
         self.start_datetime = None
         self.end_datetime = None
-        self.date = ""
 
         for answer in response.answers:
             if answer.question == "Name of Organization":
                 self.org = answer.answer
             if answer.question == "Name of Event Organizer":
-                self.name == answer.answer
+                self.name = answer.answer
+            if answer.question == "Title/Position of Event Organizer":
+                self.title = answer.answer
             if answer.question == "Phone Number":
                 self.phone_number = answer.answer
             if answer.question == "Email Address":
@@ -70,6 +74,7 @@ class ResponseObject:
                 self.month = int(answer.answer[5:7])
                 self.date = int(answer.answer[8:])
             if answer.question == "Start Time (including setup and cleanup)":
+                self.starttime = answer.answer
                 if answer.answer[1] == ":":
                     try:
                         self.starthour = int(answer.answer[0])
@@ -91,6 +96,7 @@ class ResponseObject:
                         self.starthour = int(s_hour)
                         self.startmin = int(s_min)
             if answer.question == "Finish Time (including setup and cleanup)":
+                self.endtime = answer.answer
                 if answer.answer[1] == ":":
                     self.endhour = int(answer.answer[0])
                     self.endmin = int(answer.answer[2:])

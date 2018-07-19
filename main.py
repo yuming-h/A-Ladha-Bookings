@@ -2,9 +2,7 @@
 import my_typeforms
 import invoice
 import response_object
-
-def generateInvoice(response):
-    pass
+import calendar
 
 def sendApprovedEmail(response):
     pass
@@ -21,11 +19,13 @@ def approve(responses):
         while (approval != "y" and approval != "n"):
                 approval = input('That is not a valid option. Approve this booking (y/n)?: ')
         if (approval == "y"):
-            print("ok")
+            supervisor = input('Please assign an Event Supervisor: ')
             responseObj = response_object.ResponseObject(response)
-            inv = invoice.Invoice(responseObj)
+            inv = invoice.Invoice(responseObj, supervisor)
             print("Generating invoice ...")
             inv_number = inv.generateInvoice()
+            print("Invoice created. Updating Calendar ...")
+            cal = calendar.Calendar(response)
         #    invoice.generateInvoice()
         #    sendEmail(reponse, generateInvoice(response))
         #    updateCalendar(reponse)
