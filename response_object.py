@@ -108,9 +108,9 @@ class ResponseObject:
             if answer.question == "Expected number of participants and attendees":
                 self.attendees = answer.answer
             if answer.question == "Number of event staff":
-                self.staff == int(answer.answer)
+                self.staff = int(answer.answer)
             if answer.question == "Will alcohol be served?":
-                self.sol == bool(int(answer.answer))
+                self.sol = bool(int(answer.answer))
         self.start_datetime = datetime.datetime(self.year, self.month, self.date, hour=self.starthour, minute=self.startmin)
         if self.endhour < 7:
             self.end_datetime = datetime.datetime(self.year, self.month, self.date + 1, hour=self.endhour, minute=self.endmin)

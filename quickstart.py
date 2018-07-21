@@ -7,7 +7,7 @@ import datetime
 
 # Setup the Calendar API
 SCOPES = 'https://www.googleapis.com/auth/calendar'
-store = file.Storage('credentials.json')
+store = file.Storage('cal_id.json')
 creds = store.get()
 if not creds or creds.invalid:
     flow = client.flow_from_clientsecrets('client_secret.json', SCOPES)
@@ -27,5 +27,6 @@ if not events:
 for event in events:
     start = event['start'].get('dateTime', event['start'].get('date'))
     print(start, event['summary'])
+
 
 input('asdasd: ')

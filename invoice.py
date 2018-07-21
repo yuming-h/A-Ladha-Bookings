@@ -145,9 +145,10 @@ class Invoice:
         with doc.create(Figure(position='h!')) as sus_pic:
             doc.append(Command('centering'))
             sus_pic.add_image(image_filename, width='500px')
-        doc.append(Command('textbf', ' '))
-        doc.append(Command('newline'))
+        doc.append(Command('begin', 'center'))
         doc.append(Command('textbf', 'Abdul Ladha Science Student Centre Invoice No. '+str(inv_number)))
+        doc.append(Command('end', 'center'))
+        doc.append(Command('textbf', ' '))
         doc.append(Command('newline'))
         doc.append(Command('textbf', 'Date issued: '))
         doc.append(str(now.month)+'-'+str(now.day)+'-'+str(now.year))
@@ -256,11 +257,11 @@ class Invoice:
             doc.append(Command('centering'))
             sus_pic.add_image(image_filename, width='500px')
 
-        doc.append(Command('textbf', ' '))
-        doc.append(Command('newline'))
 
+        doc.append(Command('begin', 'center'))
         doc.append(Command('textbf', 'Abdul Ladha Science Student Centre Booking Summary No. '+str(inv_number)))
-        doc.append(Command('newline'))
+        doc.append(Command('end', 'center'))
+        doc.append(Command('textbf', ' '))
         doc.append(Command('newline'))
 
         doc.append(Command('textbf', 'Organizer Information:'))
@@ -335,5 +336,5 @@ class Invoice:
             doc.append('N/A')
         doc.append(Command('newline'))
 
-        doc.generate_pdf('test', clean_tex=False, compiler='pdflatex') # CHANGE NAME LATER
+        doc.generate_pdf('Invoices\\Invoice '+str(inv_number), clean_tex=False, compiler='pdflatex')
         return inv_number

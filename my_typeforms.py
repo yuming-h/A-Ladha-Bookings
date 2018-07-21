@@ -9,7 +9,6 @@ def trim(responses):
     for response in responses:
         if response._token not in log_string:
             ret.append(response)
-            # log.write('{'+response._token+'}')
     return ret
 
 typeform_key = '24433f694165fa836b142cfd7cf6e0506b37956a'
