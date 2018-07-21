@@ -16,7 +16,7 @@ class ConfirmationEmail:
         send_to = self.response.email
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(my_email, '98B#j5kxsusp')
+        server.login(my_email, PASSWORD)
         event_date = self.response.start_datetime
 
         msg = MIMEMultipart()
