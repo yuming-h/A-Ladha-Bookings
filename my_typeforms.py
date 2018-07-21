@@ -11,7 +11,7 @@ def trim(responses):
             ret.append(response)
     return ret
 
-typeform_key = '24433f694165fa836b142cfd7cf6e0506b37956a'
+typeform_key = 'KEY HERE'
 ladha_form_id = 'E3lV6J'
 porch_form_id = 'PsJZ2k'
 
