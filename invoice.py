@@ -108,7 +108,7 @@ def extra_hours(end_datetime):
 
 def wknd_hours(start_datetime, end_datetime):
     if start_datetime.weekday() > 4:
-        return quantity(start_datetime, finish_datetime)
+        return quantity(start_datetime, end_datetime)
     else:
         return round(end_datetime.hour + (end_datetime.minute / 60), 2)
 
@@ -134,7 +134,7 @@ class Invoice:
 
     def generateInvoice(self):
         image_filename = os.path.join(os.path.dirname(__file__), 'Invoices\sus_header.png')
-        geometry_options = {"tmargin": "1cm", "lmargin": "2cm"}
+        geometry_options = {"tmargin": "1cm", "lmargin": "1.5cm", "rmargin": "1.5cm"}
         doc = Document(geometry_options=geometry_options)
         inv_number = getInvNum()
         now = datetime.datetime.now()

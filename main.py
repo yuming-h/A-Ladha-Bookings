@@ -5,15 +5,17 @@ import response_object
 import event_calendar
 import confirmation_email
 
-def update_log(response):
-    log = open('log.txt', 'r+')
-    log.write('{'+response._token+'}')
+def update_log(token):
+    log = open('log.txt', 'a')
+    log.write('{'+token+'}')
+    log.close()
 
 def approve(responses):
     for response in responses:
         for answer in response.answers:
             print('{question}: {answer}'.format(question=answer.question,
             answer=answer.answer))
+        print('Response Token: '+response._token)
         approval = input('Approve this booking? [y/n]: ')
         while (approval != "y" and approval != "n"):
                 approval = input('That is not a valid option. Approve this booking (y/n)?: ')
@@ -38,7 +40,7 @@ def approve(responses):
                 print("Email sent.")
         elif (approval == "n"):
             print("Approval denied.")
-        update_log(response)
+        update_log(response._token)
         input("Press Enter to view the next event.")
 
 
