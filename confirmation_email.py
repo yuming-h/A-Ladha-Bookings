@@ -12,8 +12,8 @@ class ConfirmationEmail:
         self.number = inv_number
 
     def send_confirmation(self):
-        my_email = 'bmanager.bookings@sus.ubc.ca'
-        PASSWORD = '98B#j5kxsusp'
+        my_email = '%EMAIL%'
+        PASSWORD = '%PASSWORD%'
         send_to = self.response.email
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
