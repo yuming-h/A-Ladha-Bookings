@@ -14,7 +14,7 @@ def trim(data):
 
 url = 'https://api.typeform.com/forms/E3lV6J/responses?since=2018-09-01T00%3A00%3A00'
 
-head = {'authorization': 'bearer 8ZbXPZfJLBbPfL7kj9WCZo5q2UUXBWbDqENB9qViQnzW'}
+head = {'authorization': 'bearer %TOKEN%'}
 
 resp = requests.get(url=url, headers=head)
 data = resp.json()
