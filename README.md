@@ -8,7 +8,7 @@
 
 ## Motivation
 
-Much of my job as Building Manager at the Abdul Ladha Science Student Centre (ALSSC) is very fun and inspired work, but many portions of it involve boring, menial - and therefore automatable - tasks. So, my obvious solution was to write a program to cover these parts for me so I could focus on improving the building space for all science students at UBC.
+Much of my job as Building Manager at the Abdul Ladha Science Student Centre (ALSSC) is very fun and inspired work, but many portions of it involve boring, menial - and therefore automatable - tasks. So, my obvious solution was to write a program to cover these parts for me so I could focus on the real parts of the job, that is, improving the building space and experience for all science students at UBC.
 
 
 
