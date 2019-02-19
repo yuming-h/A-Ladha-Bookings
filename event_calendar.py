@@ -19,12 +19,13 @@ def format_datetime(datetime):
         hour = '0'+hour
     if len(minute) < 2:
         minute = '0'+minute
-    return yr+'-'+month+'-'+day+'T'+hour+':'+minute+':00-07:00'
+    return yr+'-'+month+'-'+day+'T'+hour+':'+minute+':00'
 
 class EventCalendar:
 
-    def __init__(self, responseObj):
+    def __init__(self, responseObj, supervisor):
         self.response = responseObj
+        self.supervisor = supervisor
 
     def update_calendar(self):
 
@@ -38,8 +39,12 @@ class EventCalendar:
 
         event = {
           'summary': self.response.org + ' - ' + self.response.event_name,
-          'start': {'dateTime': format_datetime(self.response.start_datetime)},
-          'end': {'dateTime': format_datetime(self.response.end_datetime) },
+          'description': 'Booked Areas: ' + str(self.response.areas) + '\n' + 'Event supervisor: ' + self.supervisor,
+          'start': {'dateTime': format_datetime(self.response.start_datetime),
+                     'timeZone': 'America/Los_Angeles'},
+          'end': {'dateTime': format_datetime(self.response.end_datetime), 
+          'timeZone': 'America/Los_Angeles'},
+                    
         }
 
         event = service.events().insert(calendarId='primary', body=event).execute()

@@ -7,7 +7,7 @@ import datetime
 
 
 def getInvNum():
-    dir = os.path.join(os.path.dirname(__file__), 'Invoices\\nums.txt')
+    dir = os.path.join(os.path.dirname(__file__), 'Invoices/nums.txt')
     inv_log = open(dir, "r+")
     ret = 0
     for line in inv_log:
@@ -75,8 +75,11 @@ def quantity(start, finish):
     sta = start.hour + (start.minute / 60)
     return round(abs(fin - sta), 2)
 
-def calculate_cost(unit_cost, quantity):
-    return unit_cost * quantity
+def calculate_cost(areas, unit_cost, quantity):
+    if "Front Porch" in areas:
+        return unit_cost
+    else:
+        return unit_cost * quantity
 
 def av_cost(booking_type):
     if booking_type in 'SUS Groups (Committees)':
@@ -101,9 +104,13 @@ def spkr_cost(booking_type):
         return 30
     else:
         return 30
-
+        
+# Assume the event is being charged extra hours
 def extra_hours(end_datetime):
-    calc = (end_datetime.hour + (end_datetime.minute / 60)) - 20 % 24
+    if end_datetime.hour > 23:
+        calc = (end_datetime.hour + (end_datetime.minute / 60)) - 23
+    else:
+        calc = (end_datetime.hour + (end_datetime.minute / 60)) + 1
     return round(calc, 2)
 
 def wknd_hours(start_datetime, end_datetime):
@@ -133,7 +140,7 @@ class Invoice:
         self.event_supervisor = supervisor
 
     def generateInvoice(self):
-        image_filename = os.path.join(os.path.dirname(__file__), 'Invoices\sus_header.png')
+        image_filename = os.path.join(os.path.dirname(__file__), 'Invoices/sus_header.png')
         geometry_options = {"tmargin": "1cm", "lmargin": "1.5cm", "rmargin": "1.5cm"}
         doc = Document(geometry_options=geometry_options)
         inv_number = getInvNum()
@@ -167,7 +174,7 @@ class Invoice:
             areas = getBookingSpaces(self.response.areas)
             uc = unit_cost(self.response.booking_type, self.response.areas)
             qn = quantity(self.response.start_datetime, self.response.end_datetime)
-            booking_cost = calculate_cost(uc, qn)
+            booking_cost = calculate_cost(areas, uc, qn)
             av = av_cost(self.response.booking_type)
             spkr = spkr_cost(self.response.booking_type)
             num_extra_hours = extra_hours(self.response.end_datetime)
@@ -189,8 +196,8 @@ class Invoice:
                 table.add_row('550W Speakers', spkr, 1, spkr)
                 table.add_hline()
                 cost = cost + spkr
-            if self.response.end_datetime.hour >= 20:
-                table.add_row('After 8PM Fees', 25, num_extra_hours, 25 * num_extra_hours)
+            if self.response.end_datetime.hour > 23 or self.response.end_datetime.hour < 5:
+                table.add_row('After 11PM Fees', 25, num_extra_hours, 25 * num_extra_hours)
                 table.add_hline()
                 cost = cost + 25 * num_extra_hours
             if self.response.end_datetime.weekday() > 4:
@@ -203,7 +210,7 @@ class Invoice:
         doc.append(Command('newline'))
         doc.append(Command('newline'))
         doc.append("Note: The Balance Due above is exclusive of the Deposit. \
-        The Deposit (paid separate by cash or cheque) must be received by the Building Manager \
+        The Deposit (paid separate by cheque or AMS Journal Voucher) must be received by the Building Manager \
         at least two weeks prior to the event, unless stated otherwise by the Building Manager. \
         This Deposit includes, but is not limited to cancellation, damages, cleaning, and other penalty charges. \
         The Deposit is refunded only when ALL conditions are met.")
@@ -336,5 +343,5 @@ class Invoice:
             doc.append('N/A')
         doc.append(Command('newline'))
 
-        doc.generate_pdf('Invoices\\Invoice '+str(inv_number), clean_tex=False, compiler='pdflatex')
+        doc.generate_pdf('Invoices/Invoice '+str(inv_number), clean_tex=False, compiler='pdflatex')
         return inv_number

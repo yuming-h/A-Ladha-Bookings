@@ -13,10 +13,11 @@ class ConfirmationEmail:
 
     def send_confirmation(self):
         my_email = 'bmanager.bookings@sus.ubc.ca'
+        PASSWORD = '98B#j5kxsusp'
         send_to = self.response.email
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(my_email, '98B#j5kxsusp')
+        server.login(my_email, PASSWORD)
         event_date = self.response.start_datetime
 
         msg = MIMEMultipart()
@@ -107,77 +108,77 @@ class ConfirmationEmail:
             </div>
             """
 
-        inv = 'Invoices\\Invoice '+str(self.number)+'.pdf'
+        inv = 'Invoices/Invoice '+str(self.number)+'.pdf'
         inv_attachment = open(inv, 'rb')
         inv_part = MIMEBase('application', 'octet-stream')
         inv_part.set_payload(inv_attachment.read())
         encoders.encode_base64(inv_part)
         inv_part.add_header('Content-Disposition','attachment;filename= '+inv)
 
-        booking_contract = 'booking_package\\ALSSC Booking Contract.pdf'
+        booking_contract = 'booking_package/ALSSC Booking Contract.pdf'
         booking_contract_attachment = open(booking_contract, 'rb')
         booking_contract_part = MIMEBase('application', 'octet-stream')
         booking_contract_part.set_payload(booking_contract_attachment.read())
         encoders.encode_base64(booking_contract_part)
         booking_contract_part.add_header('Content-Disposition','attachment;filename= '+booking_contract)
 
-        terms = 'booking_package\\ALSSC Rental Terms Conditions.pdf'
+        terms = 'booking_package/ALSSC Rental Terms Conditions.pdf'
         terms_attachment = open(terms, 'rb')
         terms_part = MIMEBase('application', 'octet-stream')
         terms_part.set_payload(terms_attachment.read())
         encoders.encode_base64(terms_part)
         terms_part.add_header('Content-Disposition','attachment;filename= '+terms)
 
-        sol_permission = 'booking_package\\SOL\\A) ALSSC SOL Permission Form.pdf'
+        sol_permission = 'booking_package/SOL/A) ALSSC SOL Permission Form.pdf'
         sol_permission_attachment = open(sol_permission, 'rb')
         sol_permission_part = MIMEBase('application', 'octet-stream')
         sol_permission_part.set_payload(sol_permission_attachment.read())
         encoders.encode_base64(sol_permission_part)
         sol_permission_part.add_header('Content-Disposition','attachment;filename= '+sol_permission)
 
-        sol_floor_plan = 'booking_package\\SOL\\ALSSC Complete Floor Plan.pdf'
+        sol_floor_plan = 'booking_package/SOL/ALSSC Complete Floor Plan.pdf'
         sol_floor_plan_attachment = open(sol_floor_plan, 'rb')
         sol_floor_plan_part = MIMEBase('application', 'octet-stream')
         sol_floor_plan_part.set_payload(sol_floor_plan_attachment.read())
         encoders.encode_base64(sol_floor_plan_part)
         sol_floor_plan_part.add_header('Content-Disposition','attachment;filename= '+sol_floor_plan)
 
-        sol_app_procedure = 'booking_package\\SOL\\ALSSC SOL Application Procedure.pdf'
+        sol_app_procedure = 'booking_package/SOL/ALSSC SOL Application Procedure.pdf'
         sol_app_procedure_attachment = open(sol_app_procedure, 'rb')
         sol_app_procedure_part = MIMEBase('application', 'octet-stream')
         sol_app_procedure_part.set_payload(sol_app_procedure_attachment.read())
         encoders.encode_base64(sol_app_procedure_part)
         sol_app_procedure_part.add_header('Content-Disposition','attachment;filename= '+sol_app_procedure)
 
-        sol_handbook = 'booking_package\\SOL\\ALSSC SOL Handbook.pdf'
+        sol_handbook = 'booking_package/SOL/ALSSC SOL Handbook.pdf'
         sol_handbook_attachment = open(sol_handbook, 'rb')
         sol_handbook_part = MIMEBase('application', 'octet-stream')
         sol_handbook_part.set_payload(sol_handbook_attachment.read())
         encoders.encode_base64(sol_handbook_part)
         sol_handbook_part.add_header('Content-Disposition','attachment;filename= '+sol_handbook)
 
-        sol_req = 'booking_package\\SOL\\B) UBC SOL Request Form.pdf'
+        sol_req = 'booking_package/SOL/B) UBC SOL Request Form.pdf'
         sol_req_attachment = open(sol_req, 'rb')
         sol_req_part = MIMEBase('application', 'octet-stream')
         sol_req_part.set_payload(sol_req_attachment.read())
         encoders.encode_base64(sol_req_part)
         sol_req_part.add_header('Content-Disposition','attachment;filename= '+sol_req)
 
-        sol_safety = 'booking_package\\SOL\\C) UBC SOL Safety and Emergency Response Plan.pdf'
+        sol_safety = 'booking_package/SOL/C) UBC SOL Safety and Emergency Response Plan.pdf'
         sol_safety_attachment = open(sol_safety, 'rb')
         sol_safety_part = MIMEBase('application', 'octet-stream')
         sol_safety_part.set_payload(sol_safety_attachment.read())
         encoders.encode_base64(sol_safety_part)
         sol_safety_part.add_header('Content-Disposition','attachment;filename= '+sol_safety)
 
-        sol_plan = 'booking_package\\SOL\\D) ALSSC SOL Organizer Plan.pdf'
+        sol_plan = 'booking_package/SOL/D) ALSSC SOL Organizer Plan.pdf'
         sol_plan_attachment = open(sol_plan, 'rb')
         sol_plan_part = MIMEBase('application', 'octet-stream')
         sol_plan_part.set_payload(sol_plan_attachment.read())
         encoders.encode_base64(sol_plan_part)
         sol_plan_part.add_header('Content-Disposition','attachment;filename= '+sol_plan)
 
-        sol_cleaning = 'booking_package\\SOL\\UBC Cleaning Expectations.pdf'
+        sol_cleaning = 'booking_package/SOL/UBC Cleaning Expectations.pdf'
         sol_cleaning_attachment = open(sol_cleaning, 'rb')
         sol_cleaning_part = MIMEBase('application', 'octet-stream')
         sol_cleaning_part.set_payload(sol_cleaning_attachment.read())
@@ -203,6 +204,6 @@ class ConfirmationEmail:
             msg.attach(MIMEText(reg_body, 'html'))
         text = msg.as_string()
 
-        server.sendmail(my_email, send_to, text) # CHANGE LATER
+        server.sendmail(my_email, send_to, text)
 
         server.quit()

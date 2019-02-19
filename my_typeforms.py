@@ -1,39 +1,24 @@
-import typeform
+import requests
 
 # takes in responses and removes returns new list with unseen responses
-def trim(responses):
+def trim(data):
     log = open('log.txt', 'r+')
     # todo = open("todo.txt", "a+")
     ret = []
     log_string = log.read()
-    for response in responses:
-        if response._token not in log_string:
+    for response in data['items']:
+        if response['token'] not in log_string:
             ret.append(response)
     log.close()
     return ret
 
-typeform_key = '24433f694165fa836b142cfd7cf6e0506b37956a'
-ladha_form_id = 'E3lV6J'
-porch_form_id = 'PsJZ2k'
+url = 'https://api.typeform.com/forms/E3lV6J/responses?since=2018-09-01T00%3A00%3A00'
 
-ladha_form = typeform.Form(api_key=typeform_key, form_id=ladha_form_id)
-porch_form = typeform.Form(api_key=typeform_key, form_id=porch_form_id)
+head = {'authorization': 'bearer 8ZbXPZfJLBbPfL7kj9WCZo5q2UUXBWbDqENB9qViQnzW'}
 
-ladha_responses = ladha_form.get_responses()
-porch_responses = porch_form.get_responses()
+resp = requests.get(url=url, headers=head)
+data = resp.json()
 
 class Typeform:
     def __init__(self):
-        self.ladha_responses = trim(ladha_responses)
-
-
-
-
-
-
-
-
-#    for response in ladha_responses:
-    #    for answer in response.answers:
-    #        print('{question}: {answer}'.format(question=answer.question,
-    #        answer=answer.answer))
+        self.ladha_responses = trim(data)
