@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="https://i.imgur.com/g5L7QWQ.png" width="25%" alt="Inertia"/>
+  <img src="https://i.imgur.com/g5L7QWQ.png" width="25%"/>
 </p>
 
 <p align="center">
-  An all-in-one Python script I wrote to replace me!
+  A neat little Python program I wrote to replace me!
 </p>
 
 ## Motivation
