@@ -1,10 +1,8 @@
 ![img](https://i.imgur.com/g5L7QWQ.png)
 
-```html
 <p align="center">
   An all-in-one Python script I wrote to replace me!
 </p>
-```
 
 ## Motivation
 
