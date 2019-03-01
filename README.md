@@ -16,7 +16,7 @@ Much of my job as Building Manager at the Abdul Ladha Science Student Centre (AL
 
 - ⚡ Faster than me.
 - 🔣 Calculates costs of rentals based on factors such as number of hours, late hours, weekends, internal vs. external organizations, etc.
-- 📝 Self-documenting (not in a code-sense, but also in a code-sense): generates invoices with LaTeX for every event booking.
--  📜 Schedules building supervisors to oversee student events.
-- 📧 Email notifications.
-- 📆 Pushes event data to the Science Undergraduate Society (SUS) website to alert students on when the building is being booked or free to study in.
+- 📝 Self-documenting (not in a code-sense, but maybe also in a code-sense): generates invoices with LaTeX for every event booking.
+- 📜 Schedules building supervisors to oversee student events.
+- 📧 Email notifications for bookees.
+- 📆 Pushes event data to the Science Undergraduate Society (SUS) website to let students know when the building is being booked or free to study in.
